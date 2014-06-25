@@ -18,6 +18,7 @@ import com.sun.jersey.api.client.WebResource;
 
 import edu.iiitb.ems.model.Event;
 import edu.iiitb.ems.model.User;
+import edu.iiitb.ems.util.Constants;
 
 public class EventsRegisteredAction extends ActionSupport implements SessionAware
 {
@@ -45,42 +46,55 @@ public class EventsRegisteredAction extends ActionSupport implements SessionAwar
 	public String execute()
 	{
 
-		Client client = Client.create();
+		User user = (User) session.get("user");
 
-		WebResource webResource = client.resource("http://localhost:8080/TravelModule/rest/transport/get/2");
-
-		ClientResponse response = webResource.accept(MediaType.APPLICATION_JSON).get(ClientResponse.class);
-
-		String output = response.getEntity(String.class);
-
-		System.out.println("Output from Server .... \n");
-
-		try
+		if (user != null)
 		{
-			JSONArray jsonArray = new JSONArray(output);
-			JSONObject jsonObject = null;
 
-			for (int i = 0; i < jsonArray.length(); i++)
+			Client client = Client.create();
+
+			WebResource webResource = client.resource(Constants.TRAVEL_MODULE_HOST
+					+ "transport/get/"
+					+ user.getUserId());
+
+			ClientResponse response = webResource.accept(MediaType.APPLICATION_JSON).get(ClientResponse.class);
+
+			String output = response.getEntity(String.class);
+
+			System.out.println("Output from Server .... \n");
+
+			try
 			{
-				jsonObject = jsonArray.getJSONObject(i);
-				Event event = new Event();
-				event.setUser_event_id(jsonObject.optString("user_event_id"));
-				event.setEvent_name(jsonObject.optString("event_name"));
-				event.setEvent_start_date(jsonObject.optString("event_startdate"));
-				event.setEvent_time(jsonObject.optString("event_time"));
-				event.getVenue().setName(jsonObject.optString("venue_name"));
-				System.out.println("***********************************"+event.getUser_event_id());
-				events.add(event);
+				JSONArray jsonArray = new JSONArray(output);
+				JSONObject jsonObject = null;
 
-				System.out.println(jsonObject);
+				for (int i = 0; i < jsonArray.length(); i++)
+				{
+					jsonObject = jsonArray.getJSONObject(i);
+					Event event = new Event();
+					event.setUser_event_id(jsonObject.optString("user_event_id"));
+					event.setEvent_name(jsonObject.optString("event_name"));
+					event.setEvent_start_date(jsonObject.optString("event_startdate"));
+					event.setEvent_time(jsonObject.optString("event_time"));
+					event.getVenue().setName(jsonObject.optString("venue_name"));
+					System.out.println("***********************************"
+							+ event.getUser_event_id());
+					events.add(event);
+
+					System.out.println(jsonObject);
+
+				}
 
 			}
-
+			catch (JSONException e)
+			{
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 		}
-		catch (JSONException e)
+		else
 		{
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			return LOGIN;
 		}
 
 		return SUCCESS;

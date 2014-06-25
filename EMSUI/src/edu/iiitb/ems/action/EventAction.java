@@ -15,6 +15,7 @@ import com.sun.jersey.api.client.ClientResponse;
 import com.sun.jersey.api.client.WebResource;
 
 import edu.iiitb.ems.model.User;
+import edu.iiitb.ems.util.Constants;
 
 public class EventAction extends ActionSupport implements SessionAware
 {
@@ -117,9 +118,11 @@ public class EventAction extends ActionSupport implements SessionAware
 
 		Client client = Client.create();
 
-		WebResource webResource = client.resource("http://localhost:8080/EMSModule/rest/event/post/insert");
+		WebResource webResource = client.resource(Constants.EVENT_MODULE_HOST
+				+ "event/post/insert");
 
-		String input = "{\"event_name\":\"" + eventname + "\",\"event_start_date\":\"" + eventstartdate + "\",\"event_end_date\":\"" + eventenddate
+		String input = "{\"event_name\":\""
+				+ eventname + "\",\"event_start_date\":\"" + eventstartdate + "\",\"event_end_date\":\"" + eventenddate
 				+ "\",\"event_time\":\"" + eventtime + "\",\"organiser_id\":\"" + user.getUserId() + "\",\"event_type\":\"" + eventType + "\","
 				+ "\"event_duration\":" + eventduration + ",\"event_desc\":\"" + eventDescription + "\"}";
 
@@ -127,7 +130,8 @@ public class EventAction extends ActionSupport implements SessionAware
 
 		if (response.getStatus() != 200)
 		{
-			throw new RuntimeException("Failed : HTTP error code : " + response.getStatus());
+			throw new RuntimeException("Failed : HTTP error code : "
+					+ response.getStatus());
 		}
 
 		System.out.println("Output from Server .... \n");
@@ -139,7 +143,8 @@ public class EventAction extends ActionSupport implements SessionAware
 
 			eventid = obj.optString("status_id");
 
-			System.out.println("EVENT_ID::" + eventid);
+			System.out.println("EVENT_ID::"
+					+ eventid);
 		}
 		catch (JSONException e)
 		{

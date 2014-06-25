@@ -13,6 +13,7 @@ import com.sun.jersey.api.client.ClientResponse;
 import com.sun.jersey.api.client.WebResource;
 
 import edu.iiitb.ems.model.User;
+import edu.iiitb.ems.util.Constants;
 
 public class TicketAction extends ActionSupport implements SessionAware
 {
@@ -123,7 +124,8 @@ public class TicketAction extends ActionSupport implements SessionAware
 
 		Client client = Client.create();
 
-		WebResource webResource = client.resource("http://localhost:8080/EMSModule/rest/ticket/post/insert");
+		WebResource webResource = client.resource(Constants.EVENT_MODULE_HOST
+				+"ticket/post/insert");
 
 		String input = "{\"type\":\"" + ticketType + "\",\"description\":\"" + description + "\",\"cost\":" + cost + ",\"ticketscount\":"
 				+ ticketcount + ",\"venue_id\":" + venueid + "}";

@@ -40,7 +40,7 @@
 						</nav>
 						<nav>
 							<ul id="menu">
-								<li><a href="index-1.jsp">Home</a></li>
+								<li><a href="eventsRegisteredAction">Home</a></li>
 								<li><a href="index-1.jsp">History</a></li>
 								<!-- 	<li><a href="index-2.html">Safety</a></li>
 							<li><a href="index-3.html">Charters</a></li> -->
@@ -71,8 +71,8 @@
 					<h2>Contact Us</h2>
 					<span class="cols"> Country:<br> City:<br>
 						Telephone:<br> Email:
-					</span> INDIA<br> Bangalore<br> +91 80 4140 7777<br>
-					<a href="mailto:">info@iiitb.ac.in</a>
+					</span> INDIA<br> Bangalore<br> +91 80 4140 7777<br> <a
+						href="mailto:">info@iiitb.ac.in</a>
 					<!-- <h2>Miscellaneous Info</h2>
 					<p>At vero eos et accusamus et iusto odio dignissimos ducimus
 						qui blanditiis praesentium voluptatum deleniti atque corrupti quos

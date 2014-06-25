@@ -80,7 +80,7 @@
 						</nav>
 						<nav>
 							<ul id="menu">
-								<li><a href="index-1.jsp">Home</a></li>
+								<li><a href="eventsRegisteredAction">Home</a></li>
 								<li id="menu_active"><a href="index-1.jsp">History</a></li>
 								<!-- <li><a href="index-2.html">Safety</a></li>
 							<li><a href="index-3.html">Charters</a></li> -->

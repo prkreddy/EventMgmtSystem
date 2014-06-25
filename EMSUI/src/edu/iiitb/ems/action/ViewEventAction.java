@@ -20,6 +20,7 @@ import com.sun.jersey.api.client.WebResource;
 import edu.iiitb.ems.model.Ticket;
 import edu.iiitb.ems.model.User;
 import edu.iiitb.ems.model.Venue;
+import edu.iiitb.ems.util.Constants;
 
 public class ViewEventAction extends ActionSupport implements SessionAware, ServletRequestAware
 {
@@ -84,7 +85,8 @@ public class ViewEventAction extends ActionSupport implements SessionAware, Serv
 
 		Client client = Client.create();
 
-		WebResource webResource = client.resource("http://localhost:8080/EMSModule/rest/event/get/24");
+		WebResource webResource = client.resource(Constants.EVENT_MODULE_HOST
+				+ "event/get/24");
 
 		/*
 		 * String input = "{\"event_name\":\"" + eventname +
@@ -105,17 +107,16 @@ public class ViewEventAction extends ActionSupport implements SessionAware, Serv
 
 		System.out.println("Output from Server .... \n");
 		String output = response.getEntity(String.class);
-		 System.out.println(output);
+		System.out.println(output);
 
 		try
 		{
 			JSONObject obj = new JSONObject(output);
 
-
 			String eventdesc = obj.optString("event_desc");
 
-
-			System.out.println("eventdesc::" + eventdesc);
+			System.out.println("eventdesc::"
+					+ eventdesc);
 
 		}
 		catch (JSONException e)

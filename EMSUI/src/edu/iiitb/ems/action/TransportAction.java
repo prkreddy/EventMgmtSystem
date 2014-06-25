@@ -13,6 +13,7 @@ import com.sun.jersey.api.client.ClientResponse;
 import com.sun.jersey.api.client.WebResource;
 
 import edu.iiitb.ems.model.User;
+import edu.iiitb.ems.util.Constants;
 
 public class TransportAction extends ActionSupport implements SessionAware
 {
@@ -135,18 +136,21 @@ public class TransportAction extends ActionSupport implements SessionAware
 
 		Client client = Client.create();
 
-		WebResource webResource = client.resource("http://localhost:8080/TravelModule/rest/transport/post/insert");
+		WebResource webResource = client.resource(Constants.TRAVEL_MODULE_HOST
+				+ "transport/post/insert");
 
-		String input = "{\"travelmode\":\"" + travelmode + "\",\"travel_type\":\"" + travel_type + "\",\"user_event\":\"" + user_event
+		String input = "{\"travelmode\":\""
+				+ travelmode + "\",\"travel_type\":\"" + travel_type + "\",\"user_event\":\"" + user_event
 				+ "\",\"source\":\"" + source + "\",\"destination\":\"" + destination + "\",\"departureDate\":\"" + departureDate + "\","
-				+ "\"departureTime\":\"" + departureTime + "\",\"returnDate\":\"" + returnDate + "\"" + ",\"returnTime\":\"" + returnTime 
+				+ "\"departureTime\":\"" + departureTime + "\",\"returnDate\":\"" + returnDate + "\"" + ",\"returnTime\":\"" + returnTime
 				+ "\",\"passCount\":" + passCount + "}";
 
 		ClientResponse response = webResource.type(MediaType.APPLICATION_JSON).post(ClientResponse.class, input);
 
 		if (response.getStatus() != 200)
 		{
-			throw new RuntimeException("Failed : HTTP error code : " + response.getStatus());
+			throw new RuntimeException("Failed : HTTP error code : "
+					+ response.getStatus());
 		}
 
 		System.out.println("Output from Server .... \n");
@@ -158,10 +162,12 @@ public class TransportAction extends ActionSupport implements SessionAware
 
 			String service_id = obj.optString("service_id");
 
-			System.out.println("service_id::" + service_id);
+			System.out.println("service_id::"
+					+ service_id);
 			String invoice_id = obj.optString("invoice_id");
-			
-			System.out.println("invoice_id::" + invoice_id);
+
+			System.out.println("invoice_id::"
+					+ invoice_id);
 		}
 		catch (JSONException e)
 		{
