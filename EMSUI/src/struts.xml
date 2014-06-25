@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE struts PUBLIC
+    "-//Apache Software Foundation//DTD Struts Configuration 2.3//EN"
+    "http://struts.apache.org/dtds/struts-2.3.dtd">
+
+<struts>
+	<constant name="struts.devMode" value="true" />
+
+
+	<package name="default" namespace="/" extends="struts-default">
+		<result-types>
+			<result-type name="tiles"
+				class="org.apache.struts2.views.tiles.TilesResult" />
+		</result-types>
+
+		<action name="testDBConnection" class="edu.iiitb.ems.action.TestAction">
+			<result name="success">/index.jsp</result>
+		</action>
+
+		<action name="loginAction" class="edu.iiitb.ems.action.login.LoginAction">
+			<result name="success">/index.jsp</result>
+			<result name="visitor">/visitorHome.jsp</result>
+			<result name="organiser">/index_home.html</result>
+		</action>
+
+		<action name="createEvent">
+			<result>/events/createEvent.jsp</result>
+		</action>
+		<action name="eventAction" class="edu.iiitb.ems.action.EventAction">
+			<result name="success">/events/addVenue.jsp</result>
+		</action>
+
+		<action name="addVenueAction" class="edu.iiitb.ems.action.VenueAction">
+			<result name="success">/events/addTicket.jsp</result>
+		</action>
+
+		<action name="addTikcetAction" class="edu.iiitb.ems.action.TicketAction">
+			<result name="success">/index.jsp</result>
+		</action>
+
+		<action name="viewEventService" class="edu.iiitb.ems.action.ViewEventAction">
+			<result name="success">/index.jsp</result>
+		</action>
+
+		<action name="addTransportService" class="edu.iiitb.ems.action.TransportAction">
+			<result name="success" type="redirect">/eventsRegisteredAction</result>
+		</action>
+
+
+		<action name="eventsRegisteredAction" class="edu.iiitb.ems.action.EventsRegisteredAction">
+			<result name="success">/newindex.jsp</result>
+		</action>
+		<action name="registerTransport" class="edu.iiitb.ems.action.RegisterTransportAction">
+			<result name="success">/index-1.jsp</result>
+		</action>
+
+	</package>
+
+</struts>
