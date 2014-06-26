@@ -6,9 +6,9 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
 </head>
-<body>SUCCESS
-
-
-
+<body>
+	<%
+		response.sendRedirect("testAction.action?pagetype=guest");
+	%>
 </body>
 </html>

@@ -20,6 +20,18 @@ public class LoginAction extends ActionSupport implements SessionAware, ServletR
 {
 
 	private String username;
+	
+	private String pagetype;
+
+	public String getPagetype()
+	{
+		return pagetype;
+	}
+
+	public void setPagetype(String pagetype)
+	{
+		this.pagetype = pagetype;
+	}
 
 	public String getUsername()
 	{
@@ -58,13 +70,26 @@ public class LoginAction extends ActionSupport implements SessionAware, ServletR
 
 	public String execute()
 	{
+		String result = "";
 
 		User user = (User) session.get("user");
 
 		if (user != null)
 		{
+			if ("visitor".equals(user.getUserType()))
+			{
 
-			return SUCCESS;
+				result = "visitor";
+				pagetype="visitor";
+			}
+			else if ("organiser".equals(user.getUserType()))
+			{
+
+				result = "organiser";
+				pagetype="organiser";
+
+			}
+
 		}
 
 		else
@@ -80,23 +105,25 @@ public class LoginAction extends ActionSupport implements SessionAware, ServletR
 				if ("visitor".equals(newUser.getUserType()))
 				{
 
-					return "visitor";
+					result = "visitor";
+					pagetype="visitor";
 				}
 				else if ("organiser".equals(newUser.getUserType()))
 				{
 
-					return "organiser";
+					result = "organiser";
+					pagetype="organiser";
 
 				}
 
-				return SUCCESS;
 			}
 			else
 			{
-				return INPUT;
+				result = INPUT;
 			}
 
 		}
+		return result;
 	}
 
 	@Override

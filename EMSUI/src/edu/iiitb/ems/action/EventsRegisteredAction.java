@@ -53,6 +53,8 @@ public class EventsRegisteredAction extends ActionSupport implements SessionAwar
 
 			Client client = Client.create();
 
+			System.out.println("userID: "
+					+ user.getUserId());
 			WebResource webResource = client.resource(Constants.TRAVEL_MODULE_HOST
 					+ "transport/get/"
 					+ user.getUserId());
@@ -60,6 +62,7 @@ public class EventsRegisteredAction extends ActionSupport implements SessionAwar
 			ClientResponse response = webResource.accept(MediaType.APPLICATION_JSON).get(ClientResponse.class);
 
 			String output = response.getEntity(String.class);
+			System.out.println(output);
 
 			System.out.println("Output from Server .... \n");
 

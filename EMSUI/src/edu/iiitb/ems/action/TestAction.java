@@ -1,44 +1,63 @@
 package edu.iiitb.ems.action;
 
-import java.sql.Connection;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.List;
 
-import edu.iiitb.ems.util.ConnectionPool;
+import edu.iiitb.ems.dao.EventDAO;
+import edu.iiitb.ems.dao.impl.EventDAOImpl;
+import edu.iiitb.ems.model.Event;
 
 public class TestAction
 {
 
+	String pagetype;
+
+	public String getPagetype()
+	{
+		return pagetype;
+	}
+
+	public void setPagetype(String pagetype)
+	{
+		this.pagetype = pagetype;
+	}
+
+	List<String> eventids = new ArrayList<String>();
+
+	public List<String> getEventids()
+	{
+		return eventids;
+	}
+
+	public void setEventids(List<String> eventids)
+	{
+		this.eventids = eventids;
+	}
+
 	public String execute()
 	{
 
-		Connection conn = ConnectionPool.getConnection();
+		EventDAO dao = new EventDAOImpl();
+		List<Event> events = dao.getEvents();
 
-		try
+		for (Event event : events)
 		{
-			Statement stmt = conn.createStatement();
+			eventids.add(event.getEvent_id() + "");
 
-			ResultSet rs = stmt.executeQuery("select * from Events");
-
-			while (rs.next())
-			{
-				System.out.println("COLUMN: " + rs.getString(2));
-			}
-		}
-		catch (SQLException e)
-		{
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		finally
-		{
-			
-			ConnectionPool.freeConnection(conn);
 		}
 
-		return "success";
+		if ("organiser".equals(pagetype))
+		{
+			return "organiser";
+		}
+		else if ("visitor".equals(pagetype))
+		{
+			return "visitor";
+		}
+		else
+		{
+			return "guest";
+		}
 
 	}
-
 }
