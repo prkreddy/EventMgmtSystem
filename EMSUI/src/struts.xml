@@ -18,8 +18,7 @@
 		</action>
 
 		<action name="loginAction" class="edu.iiitb.ems.action.login.LoginAction">
-			<result name="visitor" type="redirect">testAction.action?pagetype=visitor</result>
-			<result name="organiser" type="redirect">testAction.action?pagetype=organiser</result>
+			<result name="success" type="redirect">testAction.action</result>			
 			<result name="input">login.html</result>
 		</action>
 

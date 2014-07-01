@@ -20,7 +20,7 @@ public class LoginAction extends ActionSupport implements SessionAware, ServletR
 {
 
 	private String username;
-	
+
 	private String pagetype;
 
 	public String getPagetype()
@@ -76,19 +76,8 @@ public class LoginAction extends ActionSupport implements SessionAware, ServletR
 
 		if (user != null)
 		{
-			if ("visitor".equals(user.getUserType()))
-			{
 
-				result = "visitor";
-				pagetype="visitor";
-			}
-			else if ("organiser".equals(user.getUserType()))
-			{
-
-				result = "organiser";
-				pagetype="organiser";
-
-			}
+			result = SUCCESS;
 
 		}
 
@@ -102,19 +91,7 @@ public class LoginAction extends ActionSupport implements SessionAware, ServletR
 				newUser = tempuser;
 				session.put("user", newUser);
 
-				if ("visitor".equals(newUser.getUserType()))
-				{
-
-					result = "visitor";
-					pagetype="visitor";
-				}
-				else if ("organiser".equals(newUser.getUserType()))
-				{
-
-					result = "organiser";
-					pagetype="organiser";
-
-				}
+				result = SUCCESS;
 
 			}
 			else

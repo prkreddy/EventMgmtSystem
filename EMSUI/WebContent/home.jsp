@@ -8,7 +8,7 @@
 </head>
 <body>
 	<%
-		response.sendRedirect("testAction.action?pagetype=guest");
+		response.sendRedirect("testAction.action");
 	%>
 </body>
 </html>

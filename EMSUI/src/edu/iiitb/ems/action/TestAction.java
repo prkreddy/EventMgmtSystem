@@ -2,12 +2,16 @@ package edu.iiitb.ems.action;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
+
+import org.apache.struts2.interceptor.SessionAware;
 
 import edu.iiitb.ems.dao.EventDAO;
 import edu.iiitb.ems.dao.impl.EventDAOImpl;
 import edu.iiitb.ems.model.Event;
+import edu.iiitb.ems.model.User;
 
-public class TestAction
+public class TestAction implements SessionAware
 {
 
 	String pagetype;
@@ -46,18 +50,34 @@ public class TestAction
 
 		}
 
-		if ("organiser".equals(pagetype))
+		User user = (User) session.get("user");
+
+		if (user != null)
 		{
-			return "organiser";
+
+			if ("organiser".equals(user.getUserType()))
+			{
+				return "organiser";
+			}
+			else if ("visitor".equals(user.getUserType()))
+			{
+				return "visitor";
+			}
+			else
+			{
+				return "guest";
+			}
 		}
-		else if ("visitor".equals(pagetype))
-		{
-			return "visitor";
-		}
-		else
-		{
-			return "guest";
-		}
+		return "guest";
+
+	}
+
+	Map<String, Object> session;
+
+	@Override
+	public void setSession(Map<String, Object> arg0)
+	{
+		this.session = arg0;
 
 	}
 }
