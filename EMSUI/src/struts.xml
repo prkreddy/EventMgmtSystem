@@ -18,7 +18,7 @@
 		</action>
 
 		<action name="loginAction" class="edu.iiitb.ems.action.login.LoginAction">
-			<result name="success" type="redirect">testAction.action</result>			
+			<result name="success" type="redirect">testAction.action</result>
 			<result name="input">login.html</result>
 		</action>
 
@@ -47,10 +47,10 @@
 
 
 		<action name="eventsRegisteredAction" class="edu.iiitb.ems.action.EventsRegisteredAction">
-			<result name="success">/travel/newindex.jsp</result>
+			<result name="success" type="tiles">eventsRegistered.tiles</result>
 		</action>
 		<action name="registerTransport" class="edu.iiitb.ems.action.RegisterTransportAction">
-			<result name="success">/travel/index-1.jsp</result>
+			<result name="success" type="tiles">registerTransport.tiles</result>
 		</action>
 
 		<action name="exit" class="edu.iiitb.ems.action.LogoutAction">
@@ -64,6 +64,14 @@
 		</action>
 
 		<action name="imageAction" class="edu.iiitb.ems.action.ImageAction">
+		</action>
+
+		<action name="travelContactAction">
+			<result type="tiles">contacts.tiles</result>
+		</action>
+
+		<action name="historyBooked" class="edu.iiitb.ems.action.TransportRegisteredAction">
+			<result name="success" type="tiles">transport.tiles</result>
 		</action>
 	</package>
 

@@ -20,7 +20,7 @@ import edu.iiitb.ems.model.Event;
 import edu.iiitb.ems.model.User;
 import edu.iiitb.ems.util.Constants;
 
-public class EventsRegisteredAction extends ActionSupport implements SessionAware
+public class TransportRegisteredAction extends ActionSupport implements SessionAware
 {
 
 	/**
@@ -53,11 +53,8 @@ public class EventsRegisteredAction extends ActionSupport implements SessionAwar
 
 			Client client = Client.create();
 
-			System.out.println("userID: "
-					+ user.getUserId());
-			WebResource webResource = client.resource(Constants.TRAVEL_MODULE_HOST
-					+ "transport/get/eventRegistered/"
-					+ user.getUserId());
+			System.out.println("userID: " + user.getUserId());
+			WebResource webResource = client.resource(Constants.TRAVEL_MODULE_HOST + "transport/get/transRegistered/" + user.getUserId());
 
 			ClientResponse response = webResource.accept(MediaType.APPLICATION_JSON).get(ClientResponse.class);
 
@@ -75,13 +72,12 @@ public class EventsRegisteredAction extends ActionSupport implements SessionAwar
 				{
 					jsonObject = jsonArray.getJSONObject(i);
 					Event event = new Event();
-					event.setUser_event_id(jsonObject.optString("user_event_id"));
+					event.getTransport().setTransportId(jsonObject.optString("serviceId"));
 					event.setEvent_name(jsonObject.optString("event_name"));
-					event.setEvent_start_date(jsonObject.optString("event_startdate"));
-					event.setEvent_time(jsonObject.optString("event_time"));
 					event.getVenue().setName(jsonObject.optString("venue_name"));
-					System.out.println("***********************************"
-							+ event.getUser_event_id());
+					event.getTransport().setSource(jsonObject.optString("source"));
+					event.getTransport().setDestination(jsonObject.optString("destination"));
+					event.getTransport().setPassCount(Integer.parseInt(jsonObject.optString("passengercount")));
 					events.add(event);
 
 					System.out.println(jsonObject);

@@ -27,7 +27,7 @@
 			</div>
 			<nav>
 				<ul class="sf-menu" id="nav">
-					<li class="selected"><a href="index.html">home</a></li>
+					<li class="selected"><a href="loginAction">home</a></li>
 					<li><a href="about.html">about me</a></li>
 					<li><a href="#">services</a>
 						<ul>

@@ -27,7 +27,7 @@ public class Event
 	private String event_type;
 	public int organiser_id;
 
-	private Venue venue=new Venue();
+	private Venue venue = new Venue();
 
 	public Venue getVenue()
 	{
@@ -37,6 +37,18 @@ public class Event
 	public void setVenue(Venue venue)
 	{
 		this.venue = venue;
+	}
+
+	private Transport transport = new Transport();
+
+	public Transport getTransport()
+	{
+		return transport;
+	}
+
+	public void setTransport(Transport transport)
+	{
+		this.transport = transport;
 	}
 
 	public int getEvent_duration()
