@@ -6,6 +6,7 @@ public class Event
 {
 
 	private String user_event_id;
+
 	public String getUser_event_id()
 	{
 		return user_event_id;
@@ -28,6 +29,18 @@ public class Event
 	public int organiser_id;
 
 	private Venue venue;
+
+	private Transport transport;
+
+	public Transport getTransport()
+	{
+		return transport;
+	}
+
+	public void setTransport(Transport transport)
+	{
+		this.transport = transport;
+	}
 
 	public Venue getVenue()
 	{

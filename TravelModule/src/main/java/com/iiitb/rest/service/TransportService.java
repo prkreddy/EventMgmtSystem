@@ -34,7 +34,7 @@ public class TransportService
 {
 
 	@GET
-	@Path("/get/{userid}")
+	@Path("/get/eventRegistered/{userid}")
 	public Response getAllEventsTransportNotBooked(@PathParam("userid") int userid) throws JSONException
 	{
 		System.out.println(userid);
@@ -45,8 +45,7 @@ public class TransportService
 		List<Event> events;
 		try
 		{
-			events = dao.getEventsTransportNotBooked(userid
-					+ "", "transport");
+			events = dao.getEventsTransportNotBooked(userid + "", "transport");
 
 			JSONArray jsonArray = new JSONArray();
 			JSONObject jsonObject = null;
@@ -58,8 +57,48 @@ public class TransportService
 				jsonObject.put("event_startdate", event.getEvent_start_date());
 				jsonObject.put("event_time", event.getEvent_time());
 				jsonObject.put("event_type", event.getEvent_type());
-				jsonObject.put("venue_name", event.getVenue().getName()
-						+ "," + event.getVenue().getStreet_no());
+				jsonObject.put("venue_name", event.getVenue().getName() + "," + event.getVenue().getStreet_no());
+				jsonArray.put(jsonObject);
+			}
+
+			output = jsonArray.toString();
+
+			System.out.println(output);
+		}
+		catch (SQLException e)
+		{
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+		return Response.status(200).entity(output).build();
+
+	}
+
+	@GET
+	@Path("/get/transRegistered/{userid}")
+	public Response getAllRegisteredTransport(@PathParam("userid") int userid) throws JSONException
+	{
+		System.out.println(userid);
+		String output = "";
+
+		TransportServiceDAO dao = new TransportServiceDAOImpl();
+		List<Event> events;
+		try
+		{
+			events = dao.getEventsTransportBooked(userid + "");
+
+			JSONArray jsonArray = new JSONArray();
+			JSONObject jsonObject = null;
+			for (Event event : events)
+			{
+				jsonObject = new JSONObject();
+				jsonObject.put("serviceId", event.getTransport().getTransportId());
+				jsonObject.put("event_name", event.getEvent_name());
+				jsonObject.put("venue_name", event.getVenue().getName() + "," + event.getVenue().getStreet_no());
+				jsonObject.put("source", event.getTransport().getSource());
+				jsonObject.put("destination", event.getTransport().getDestination());
+				jsonObject.put("passengercount", event.getTransport().getPassCount());
 				jsonArray.put(jsonObject);
 			}
 
@@ -79,8 +118,7 @@ public class TransportService
 
 	@POST
 	@Path("/post/insert")
-	@Consumes({
-			MediaType.APPLICATION_FORM_URLENCODED, MediaType.APPLICATION_JSON })
+	@Consumes({ MediaType.APPLICATION_FORM_URLENCODED, MediaType.APPLICATION_JSON })
 	@Produces(MediaType.APPLICATION_JSON)
 	public Response insertTransportService(Transport transport) throws Exception
 	{
@@ -111,8 +149,7 @@ public class TransportService
 			{
 
 				TransportServiceDAO transdao = new TransportServiceDAOImpl();
-				if (transdao.insertData(service_id
-						+ "", transport) > 0)
+				if (transdao.insertData(service_id + "", transport) > 0)
 				{
 
 					InvoiceDAO invoiceDAO = new InvoiceDAOImpl();
@@ -129,9 +166,7 @@ public class TransportService
 					{
 
 						ServiceInvoiceDAO serviceInvoiceDAO = new ServiceInvoiceDAOImpl();
-						serviceInvoiceDAO.insertData(service_id
-								+ "", invoice_id
-								+ "");
+						serviceInvoiceDAO.insertData(service_id + "", invoice_id + "");
 						status = false;
 					}
 

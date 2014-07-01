@@ -16,4 +16,5 @@ public interface Queries
 	// String GET_EVENTS_TRANSPORT_NOT_REGISTERED_QRY =
 	// "select e.*, v.* from User u inner join user_event ue on u.user_id= ue.user_id inner join Events e on e.event_id = ue.event_id inner join Venue v on v.event_id = e.event_id where u.user_id=? and ue. user_event_id not in (select user_event_id from service s where service_type='?') 	and ue.user_event_id in (select distinct uev.user_event_id from user_event_venue_ticket uevt, user_event_venue uev, Invoice i, ticket_invoice ti 	where uevt.user_event_venue_id=uev.user_event_venue_id and i.invoice_id= ti.ticket_invoice_id 	and ti.user_event_venue_ticket_id= uevt.user_event_venue_ticket_id 	and i.invoice_type='ticket' and i.invoice_status='completed')";
 
+	String GET_REGISTERED_TRASPORT = "select e.*, v.*,ts.*,i.*,si.*,s.* from User u , user_event ue ,Events e , Venue v,service s, Transport_service ts,Invoice i, service_invoice si  where  v.event_id = e.event_id and e.event_id = ue.event_id and u.user_id= ue.user_id and ue. user_event_id=s.user_event_id and  s.service_id= ts.transport_id and si.service_id= s.service_id and i.invoice_id= si.service_invoice_id and u.user_id=? ";
 }

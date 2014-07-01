@@ -2,8 +2,20 @@ package com.iiitb.rest.model;
 
 public class Transport
 {
+	private int transportId;
 
 	private String travelmode;
+
+	public int getTransportId()
+	{
+		return transportId;
+	}
+
+	public void setTransportId(int transportId)
+	{
+		this.transportId = transportId;
+	}
+
 	private String travel_type;
 	private String user_event;
 	private String source;
