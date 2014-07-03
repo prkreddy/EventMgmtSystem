@@ -1,6 +1,5 @@
 package com.iiitb.rest.dao.impl;
 
-import java.io.InputStream;
 import java.sql.Blob;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -89,8 +88,12 @@ public class TransportServiceDAOImpl implements TransportServiceDAO
 				event.setEvent_name(rs.getString(++index));
 				event.setEvent_start_date(rs.getString(++index));
 				event.setEvent_end_date(rs.getString(++index));
-				InputStream eventPic = rs.getBinaryStream(++index);
-				event.setEvent_poster(eventPic);
+				// InputStream eventPic = rs.getBinaryStream(++index);
+
+				Blob blob1 = rs.getBlob(++index);
+				byte[] bytes1 = blob1.getBytes(1, (int) blob1.length());
+
+				event.setEvent_poster(bytes1);
 				Blob blob = rs.getBlob(++index);
 				byte[] bdata = blob.getBytes(1, (int) blob.length());
 				String s = new String(bdata);

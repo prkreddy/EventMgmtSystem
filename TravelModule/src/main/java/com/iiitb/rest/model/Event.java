@@ -21,7 +21,7 @@ public class Event
 	private String event_name;
 	private String event_start_date;
 	private String event_end_date;
-	private InputStream event_poster;
+	private byte[] event_poster;
 	private String event_desc;
 	private String event_time;
 	private int event_duration;
@@ -102,12 +102,14 @@ public class Event
 		this.event_end_date = event_end_date;
 	}
 
-	public InputStream getEvent_poster()
+	
+
+	public byte[] getEvent_poster()
 	{
 		return event_poster;
 	}
 
-	public void setEvent_poster(InputStream event_poster)
+	public void setEvent_poster(byte[] event_poster)
 	{
 		this.event_poster = event_poster;
 	}

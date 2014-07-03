@@ -95,8 +95,12 @@ public class EventDAOImpl implements EventDAO
 				event.setEvent_name(rs.getString(++index));
 				event.setEvent_start_date(rs.getString(++index));
 				event.setEvent_end_date(rs.getString(++index));
-				InputStream eventPic = rs.getBinaryStream(++index);
-				event.setEvent_poster(eventPic);
+				// InputStream eventPic = rs.getBinaryStream(++index);
+
+				Blob blob1 = rs.getBlob(++index);
+				byte[] bdata1 = blob1.getBytes(1, (int) blob1.length());
+
+				event.setEvent_poster(bdata1);
 				Blob blob = rs.getBlob(++index);
 				byte[] bdata = blob.getBytes(1, (int) blob.length());
 				String s = new String(bdata);
@@ -131,7 +135,6 @@ public class EventDAOImpl implements EventDAO
 
 		try
 		{
-			
 
 			stmt = conn.prepareStatement(Queries.GET_EVENTS_TRANSPORT_NOT_REGISTERED_QRY);
 
@@ -150,7 +153,7 @@ public class EventDAOImpl implements EventDAO
 				event.setEvent_start_date(rs.getString(++index));
 				event.setEvent_end_date(rs.getString(++index));
 				InputStream eventPic = rs.getBinaryStream(++index);
-				event.setEvent_poster(eventPic);
+				// event.setEvent_poster(eventPic);
 				Blob blob = rs.getBlob(++index);
 				byte[] bdata = blob.getBytes(1, (int) blob.length());
 				String s = new String(bdata);
@@ -179,8 +182,7 @@ public class EventDAOImpl implements EventDAO
 			ConnectionPool.freeConnection(conn);
 		}
 
-		System.out.println("Events size:"
-				+ events.size());
+		System.out.println("Events size:" + events.size());
 		return events;
 	}
 

@@ -82,8 +82,12 @@ public class ServiceDAOImpl implements ServiceDAO
 				event.setEvent_name(rs.getString(++index));
 				event.setEvent_start_date(rs.getString(++index));
 				event.setEvent_end_date(rs.getString(++index));
-				InputStream eventPic = rs.getBinaryStream(++index);
-				event.setEvent_poster(eventPic);
+				// InputStream eventPic = rs.getBinaryStream(++index);
+
+				Blob blob1 = rs.getBlob(++index);
+				byte[] bytes1 = blob1.getBytes(1, (int) blob1.length());
+				event.setEvent_poster(bytes1);
+				// event.setEvent_poster(eventPic);
 				Blob blob = rs.getBlob(++index);
 				byte[] bdata = blob.getBytes(1, (int) blob.length());
 				String s = new String(bdata);
