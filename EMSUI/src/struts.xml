@@ -42,9 +42,14 @@
 		</action>
 
 		<action name="addTransportService" class="edu.iiitb.ems.action.TransportAction">
-			<result name="success" type="redirect">/eventsRegisteredAction</result>
+			<result name="success" type="tiles">travelregistersuccess.tiles
+			</result>
 		</action>
 
+
+		<action name="eventsRegisteredAction" class="edu.iiitb.ems.action.EventsRegisteredAction">
+			<result name="success" type="tiles">eventsRegistered.tiles</result>
+		</action>
 
 		<action name="eventsRegisteredAction" class="edu.iiitb.ems.action.EventsRegisteredAction">
 			<result name="success" type="tiles">eventsRegistered.tiles</result>

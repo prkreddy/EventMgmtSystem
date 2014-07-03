@@ -26,6 +26,8 @@
 	<definition name="transport.tiles" extends="baseLayout">
 		<put-attribute name="body" value="/travel/transportRegistered.jsp" />
 	</definition>
-
+<definition name="travelregistersuccess.tiles" extends="baseLayout">
+		<put-attribute name="body" value="/travel/registerSuccess.jsp" />
+	</definition>
 
 </tiles-definitions>

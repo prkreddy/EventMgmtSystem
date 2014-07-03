@@ -28,6 +28,22 @@ public class TransportAction extends ActionSupport implements SessionAware
 	private String returnDate;
 	private String returnTime;
 	private String passCount;
+	private String trackingId;
+
+	public String getTrackingId()
+	{
+		return trackingId;
+	}
+
+	public void setTrackingId(String trackingId)
+	{
+		this.trackingId = trackingId;
+	}
+
+	public Map<String, Object> getSession()
+	{
+		return session;
+	}
 
 	public String getTravelmode()
 	{
@@ -160,10 +176,10 @@ public class TransportAction extends ActionSupport implements SessionAware
 		{
 			org.codehaus.jettison.json.JSONObject obj = new org.codehaus.jettison.json.JSONObject(output);
 
-			String service_id = obj.optString("service_id");
+			trackingId = obj.optString("service_id");
 
 			System.out.println("service_id::"
-					+ service_id);
+					+ trackingId);
 			String invoice_id = obj.optString("invoice_id");
 
 			System.out.println("invoice_id::"
