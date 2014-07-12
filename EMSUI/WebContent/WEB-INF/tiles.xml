@@ -22,12 +22,17 @@
 	<definition name="contacts.tiles" extends="baseLayout">
 		<put-attribute name="body" value="/travel/contacts.jsp" />
 	</definition>
-	
+
 	<definition name="transport.tiles" extends="baseLayout">
 		<put-attribute name="body" value="/travel/transportRegistered.jsp" />
 	</definition>
-<definition name="travelregistersuccess.tiles" extends="baseLayout">
+	<definition name="travelregistersuccess.tiles" extends="baseLayout">
 		<put-attribute name="body" value="/travel/registerSuccess.jsp" />
 	</definition>
+
+	<definition name="transportDetails.tiles" extends="baseLayout">
+		<put-attribute name="body" value="/travel/transportDetails.jsp" />
+	</definition>
+
 
 </tiles-definitions>

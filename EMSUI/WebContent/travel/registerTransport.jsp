@@ -28,7 +28,7 @@
 
 
 
-	
+
 	<div class="main">
 		<div id="banner">
 			<!-- <div class="text1">
@@ -96,7 +96,8 @@
 						<div class="wrapper">
 							Leaving From:
 							<div class="bg">
-								<input type="text" class="input input1" value="Enter City"
+								<input id="source" autocomplete="off" type="text" class="input input1"
+									value="Enter City"
 									onBlur="if(this.value=='') this.value='Enter City'"
 									onFocus="if(this.value =='Enter City' ) this.value=''"
 									name="source" />
@@ -105,7 +106,8 @@
 						<div class="wrapper">
 							Going To:
 							<div class="bg">
-								<input type="text" class="input input1" value="Enter City"
+								<input id="dest" autocomplete="off" type="text" class="input input1"
+									value="Enter City"
 									onBlur="if(this.value=='') this.value='Enter City'"
 									onFocus="if(this.value =='Enter City' ) this.value=''"
 									name="destination">
@@ -115,13 +117,13 @@
 							Departure Date and Time:
 							<div class="wrapper">
 								<div class="bg left">
-									<input type="text" class="input input2" value="mm/dd/yyyy "
-										onBlur="if(this.value=='') this.value='mm/dd/yyyy '"
-										onFocus="if(this.value =='mm/dd/yyyy ' ) this.value=''"
+									<input type="text" autocomplete="off" class="input input2" value="mm/dd/yyyy"
+										onBlur="if(this.value=='') this.value='mm/dd/yyyy'"
+										onFocus="if(this.value =='mm/dd/yyyy' ) this.value=''"
 										name="departureDate" id="departureDate">
 								</div>
 								<div class="bg right">
-									<input type="text" class="input input2 form_time" value="hh:mm"
+									<input type="text" autocomplete="off" class="input input2 form_time" value="hh:mm"
 										onBlur="if(this.value=='') this.value='hh:mm'"
 										onFocus="if(this.value =='hh:mm' ) this.value=''"
 										name="departureTime" id="departureTime">
@@ -132,13 +134,13 @@
 							Return Date and Time:
 							<div class="wrapper">
 								<div class="bg left">
-									<input type="text" class="input input2" value="mm/dd/yyyy "
-										onBlur="if(this.value=='') this.value='mm/dd/yyyy '"
-										onFocus="if(this.value =='mm/dd/yyyy ' ) this.value=''"
+									<input type="text" autocomplete="off" class="input input2" value="mm/dd/yyyy"
+										onBlur="if(this.value=='') this.value='mm/dd/yyyy'"
+										onFocus="if(this.value =='mm/dd/yyyy' ) this.value=''"
 										name="returnDate" id="returnDate" />
 								</div>
 								<div class="bg right">
-									<input type="text" class="input input2 form_time" value="hh:mm"
+									<input type="text" autocomplete="off" class="input input2 form_time" value="hh:mm"
 										onBlur="if(this.value=='') this.value='hh:mm'"
 										onFocus="if(this.value =='hh:mm' ) this.value=''"
 										name="returnTime" id="returnTime" />
@@ -148,20 +150,18 @@
 						<div class="wrapper">
 							<p>Passenger(s):</p>
 							<div class="bg left">
-								<input type="text" class="input input2" value="#passengers"
+								<input type="text" autocomplete="off" class="input input2" value="#passengers"
 									onBlur="if(this.value=='') this.value='#passengers'"
 									onFocus="if(this.value =='#passengers' ) this.value=''"
 									name="passCount" />
 							</div>
-							<a href="#" class="button2"
-								onClick="document.getElementById('form_1').submit()">go!</a>
+							<a href="#" class="button2" onClick="validate()">go!</a>
 						</div>
 					</form>
-
 		</section>
 		<!-- / content -->
 	</div>
-	
+
 
 	<script type="text/javascript">
 		$('.form_time').datetimepicker({
@@ -216,6 +216,82 @@
 				});
 			}
 		});
+	</script>
+
+	<script type="text/javascript">
+		function validate() {
+
+			
+			var ErrorText = "";
+			var travelmodes = document.getElementsByName("travelmode");
+		
+			if ((travelmodes[0].checked == false)
+					&& (travelmodes[1].checked == false)
+					&& (travelmodes[2].checked == false)
+					&& (travelmodes[3].checked == false)) {
+				ErrorText += " travel mode not selected\n";
+				
+			}
+
+			var travelTypes = document.getElementsByName("travel_type");
+			if ((travelTypes[0].checked == false)
+					&& (travelTypes[1].checked == false)) {
+				ErrorText += " travel type not selected\n";
+
+			}
+
+			var a = document.getElementById("source").value;
+			if (a=="Enter City") {
+
+				ErrorText += " source not entered\n";
+			}
+			var b = document.getElementById("dest").value;
+			if (b=="Enter City") {
+
+				ErrorText += " destination not entered\n";
+
+			}
+			var c = document.getElementById("departureDate").value;
+			if (c=="mm/dd/yyyy") {
+
+				ErrorText += " journey date not entered\n";
+
+			}
+			var d = document.getElementById("departureTime").value;
+			if (d=="hh:mm") {
+
+				ErrorText += " journey time  not entered\n";
+
+			}
+			var e = document.getElementById("returnDate").value;
+			if ((travelTypes[0].checked == true) && e=="mm/dd/yyyy") {
+
+				ErrorText += " return date not entered\n";
+
+			}
+			var f = document.getElementById("returnTime").value;
+			if ((travelTypes[0].checked == true) && f=="hh:mm") {
+
+				ErrorText += " return time is  not entered\n";
+
+			}
+
+			var g = document.getElementsByName("passCount")[0].value;
+
+			if (g=="#passengers") {
+
+				ErrorText += " #passengers is not entered\n";
+
+			}
+		
+			if (ErrorText.length > 0) {	
+				alert(ErrorText);
+				return false;
+			} else {
+				document.getElementById('form_1').submit();
+			}
+			return false;
+		};
 	</script>
 	<script type="text/javascript">
 		Cufon.now();

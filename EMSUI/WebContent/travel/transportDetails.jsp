@@ -1,3 +1,6 @@
+<%@ page import="edu.iiitb.ems.model.*"%>
+<%@ page import="java.util.List"%>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -5,29 +8,6 @@
 <meta charset="utf-8">
 </head>
 <body id="page2">
-
-
-	<script>
-		// When the document is ready
-		$(document).ready(function() {
-
-			$('#departureDate').datepicker({
-				format : "yyyy-mm-dd"
-			});
-
-		});
-
-		$(document).ready(function() {
-
-			$('#returnDate').datepicker({
-				format : "yyyy-mm-dd"
-			});
-
-		});
-	</script>
-
-
-
 
 	<div class="main">
 		<div id="banner">
@@ -45,21 +25,24 @@
 			<h3 align="left">--------------------------</h3>
 			<form id="form_1" action="eventsRegisteredAction" method="post">
 
-				<h4>Mode Of Transport :</h4><%=request.getParameter("travelmode")%>
+				<%
+					Event event = (Event) request.getAttribute("event");
+				%>
+
+				<h4>Mode Of Transport :</h4><%=event.getTransport().getTravelmode()%>
 				<br>
 
-				<h4>Travel Type :</h4><%=request.getParameter("travel_type")%>
-				<br>
-				<h4>Source :</h4><%=request.getParameter("source")%><br>
-				<h4>destination :</h4><%=request.getParameter("destination")%><br>
+			<%-- 	<h4>Travel Type :</h4><%=event.getTransport().getTravel_type()%>
+				<br> --%>
+				<h4>Source :</h4><%=event.getTransport().getSource()%><br>
+				<h4>destination :</h4><%=event.getTransport().getDestination()%><br>
 
-				<h4>departureDate :</h4><%=request.getParameter("departureDate")%><br>
-				<h4>departureTime :</h4><%=request.getParameter("departureTime")%><br>
-				<h4>returnDate :</h4><%=request.getParameter("returnDate")%><br>
-				<h4>returnTime :</h4><%=request.getParameter("returnTime")%><br>
-				<h4>trackingId :</h4><%=request.getAttribute("trackingId")%><br>
-				<h4>passCount :</h4><%=request.getParameter("passCount")%>
-				<br> <a href="#" class="button2"
+				<h4>departureDate :</h4><%=event.getTransport().getDepartureDate()%><br>
+				<h4>departureTime :</h4><%=event.getTransport().getDepartureTime()%><br>
+				<h4>returnDate :</h4><%=event.getTransport().getReturnDate()%><br>
+				<h4>returnTime :</h4><%=event.getTransport().getReturnTime()%><br>
+				<h4>passCount :</h4><%=event.getTransport().getPassCount()%><br> 
+				<a href="#" class="button2"
 					onClick="document.getElementById('form_1').submit()">go!</a>
 			</form>
 		</section>

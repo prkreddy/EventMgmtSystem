@@ -88,11 +88,16 @@
 										}
 								%>
 								<td><%=++i%></td>
-								<td><%=event.getTransport().getTransportId()%></td>
-								<td><%=event.getEvent_name()%></td>
-								<td><%=event.getTransport().getSource()%></td>
-								<td><%=event.getTransport().getDestination()%></td>
-								<td><%=event.getTransport().getPassCount()%></td>
+								<td><a
+									href="TransportActionDetails?trackingId=<%=event.getTransport().getTransportId()%>"><%=event.getTransport().getTransportId()%></a></td>
+								<td><a
+									href="TransportActionDetails?trackingId=<%=event.getTransport().getTransportId()%>"><%=event.getEvent_name()%></a></td>
+								<td><a
+									href="TransportActionDetails?trackingId=<%=event.getTransport().getTransportId()%>"><%=event.getTransport().getSource()%></a></td>
+								<td><a
+									href="TransportActionDetails?trackingId=<%=event.getTransport().getTransportId()%>"><%=event.getTransport().getDestination()%></a></td>
+								<td><a
+									href="TransportActionDetails?trackingId=<%=event.getTransport().getTransportId()%>"><%=event.getTransport().getPassCount()%></a></td>
 								<%-- 			<td><form action="registerTransport" method="post">
 										<input type="hidden" value="<%=event.getUser_event_id()%>"
 											name="user_event_id" id="user_event_id" />

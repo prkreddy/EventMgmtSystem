@@ -78,6 +78,10 @@
 		<action name="historyBooked" class="edu.iiitb.ems.action.TransportRegisteredAction">
 			<result name="success" type="tiles">transport.tiles</result>
 		</action>
+		
+		<action name="TransportActionDetails" class="edu.iiitb.ems.action.TransportDetails">
+			<result name="success" type="tiles">transportDetails.tiles</result>
+		</action>
 	</package>
 
 </struts>
