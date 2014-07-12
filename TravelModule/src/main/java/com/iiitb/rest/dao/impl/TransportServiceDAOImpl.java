@@ -136,4 +136,80 @@ public class TransportServiceDAOImpl implements TransportServiceDAO
 		System.out.println("Events size:" + events.size());
 		return events;
 	}
+
+	@Override
+	public Event getTransportData(String trackId) throws SQLException
+	{
+		Connection conn = ConnectionPool.getConnection();
+
+		Event event=null;
+		Venue venue=null;
+		Transport transport=null;
+
+		PreparedStatement stmt;
+
+		try
+		{
+
+			stmt = conn.prepareStatement(Queries.GET_TRANSPORT_DETAILS);
+
+			stmt.setString(1, trackId);
+
+			ResultSet rs = stmt.executeQuery();
+			if (rs.next())
+			{
+				event = new Event();
+				venue = new Venue();
+				transport = new Transport();
+				int index = 0;
+				event.setEvent_id(rs.getInt(++index));
+				event.setEvent_name(rs.getString(++index));
+				event.setEvent_start_date(rs.getString(++index));
+				event.setEvent_end_date(rs.getString(++index));
+				// InputStream eventPic = rs.getBinaryStream(++index);
+
+				Blob blob1 = rs.getBlob(++index);
+				byte[] bytes1 = blob1.getBytes(1, (int) blob1.length());
+
+				event.setEvent_poster(bytes1);
+				Blob blob = rs.getBlob(++index);
+				byte[] bdata = blob.getBytes(1, (int) blob.length());
+				String s = new String(bdata);
+				event.setEvent_desc(s);
+				event.setEvent_time(rs.getString(++index));
+				event.setEvent_duration(rs.getInt(++index));
+				event.setEvent_type(rs.getString(++index));
+				event.setOrganiser_id(rs.getInt(++index));
+				++index;
+				venue.setName(rs.getString(++index));
+				venue.setStreet_no(rs.getString(++index));
+				venue.setCity(rs.getString(++index));
+				venue.setState(rs.getString(++index));
+				venue.setCountry(rs.getString(++index));
+				venue.setPincode(rs.getString(++index));
+				event.setVenue(venue);
+				++index;
+
+				transport.setTransportId(rs.getInt("transport_id"));
+				transport.setSource(rs.getString("source"));
+				transport.setDestination(rs.getString("destination"));
+				transport.setTravelmode(rs.getString("travel_mode"));
+				transport.setDepartureDate(rs.getString("departure_date"));
+				transport.setPassCount(rs.getInt("person_count"));
+				transport.setReturnDate(rs.getString("return_date"));
+				transport.setDepartureTime(rs.getString("departure_time"));
+				transport.setReturnTime(rs.getString("return_time"));
+
+				event.setTransport(transport);
+
+			}
+		}
+
+		finally
+		{
+			ConnectionPool.freeConnection(conn);
+		}
+
+		return event;
+	}
 }

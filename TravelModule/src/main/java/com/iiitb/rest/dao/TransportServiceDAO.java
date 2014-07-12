@@ -8,10 +8,11 @@ import com.iiitb.rest.model.Transport;
 
 public interface TransportServiceDAO
 {
-	
-	public int insertData(String transport_id,Transport transport) throws SQLException;
-	
+
+	public int insertData(String transport_id, Transport transport) throws SQLException;
+
 	public List<Event> getEventsTransportBooked(String userId) throws SQLException;
 
+	public Event getTransportData(String trackId) throws SQLException;
 
 }

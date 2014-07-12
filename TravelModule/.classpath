@@ -7,5 +7,6 @@
 	<classpathentry kind="var" path="M2_REPO/junit/junit/4.8.2/junit-4.8.2.jar" sourcepath="M2_REPO/junit/junit/4.8.2/junit-4.8.2-sources.jar"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
 	<classpathentry kind="lib" path="/home/prashanth/workspace/jars/jettison-1.1.jar" sourcepath="/home/prashanth/.m2/repository/org/codehaus/jettison/jettison/1.1/jettison-1.1-sources.jar"/>
+	<classpathentry kind="lib" path="/home/prashanth/projects/jars/mail.jar"/>
 	<classpathentry kind="output" path="target/classes"/>
 </classpath>

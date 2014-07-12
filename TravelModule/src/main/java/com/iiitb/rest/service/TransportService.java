@@ -168,9 +168,12 @@ public class TransportService
 						ServiceInvoiceDAO serviceInvoiceDAO = new ServiceInvoiceDAOImpl();
 						serviceInvoiceDAO.insertData(service_id + "", invoice_id + "");
 						status = false;
-						
-						/*SendingEmail email = new SendingEmail();
-						email.sendmail("prk.reddy96@gmail.com", "mynewpassword");*/
+
+						/*
+						 * SendingEmail email = new SendingEmail();
+						 * email.sendmail("prk.reddy96@gmail.com",
+						 * "mynewpassword");
+						 */
 					}
 
 				}
@@ -207,5 +210,57 @@ public class TransportService
 		}
 
 		return Response.status(status_code).entity(returnString).build();
+	}
+
+	@GET
+	@Path("/get/transportData/{trackid}")
+	public Response getTransportDetails(@PathParam("trackid") String trackid) throws JSONException
+	{
+		String output = "";
+		int statuscode = -1;
+
+		TransportServiceDAO dao = new TransportServiceDAOImpl();
+		Event event;
+		try
+		{
+			event = dao.getTransportData(trackid);
+
+			JSONObject jsonObject = null;
+			if (event != null)
+			{
+				jsonObject = new JSONObject();
+				jsonObject.put("transport_id", event.getTransport().getTransportId());
+				jsonObject.put("source", event.getTransport().getSource());
+				jsonObject.put("destination", event.getTransport().getDestination());
+				jsonObject.put("travel_mode", event.getTransport().getTravelmode());
+				jsonObject.put("departure_date", event.getTransport().getDepartureDate());
+
+				jsonObject.put("return_date", event.getTransport().getReturnDate());
+				jsonObject.put("departure_time", event.getTransport().getDepartureTime());
+				jsonObject.put("return_time", event.getTransport().getReturnTime());
+
+				jsonObject.put("person_count", event.getTransport().getPassCount());
+
+				jsonObject.put("event_name", event.getEvent_name());
+				jsonObject.put("venue_name", event.getVenue().getName());
+
+				output = jsonObject.toString();
+				statuscode = 200;
+			}
+			else
+			{
+				statuscode = 500;
+
+			}
+
+		}
+		catch (SQLException e)
+		{
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+		return Response.status(statuscode).entity(output).build();
+
 	}
 }
