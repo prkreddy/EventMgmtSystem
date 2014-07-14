@@ -19,8 +19,8 @@
 							<ul id="top_nav">
 								<li><a href="loginAction"><img src="images/img1.gif"
 										alt=""></a></li>
-								<li><a href="travelContactAction"><img src="images/img2.gif"
-										alt=""></a></li>								
+								<!-- <li><a href="travelContactAction"><img src="images/img2.gif"
+										alt=""></a></li> -->								
 							</ul>
 						</nav>
 						<nav>

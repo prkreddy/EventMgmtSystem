@@ -53,13 +53,13 @@
 				%>
 
 				<li class="show"><a href="#"><img width="950" height="450"
-						src="http://localhost:8081/TravelModule/rest/poster/event/<%=event%>"
+						src="<%=application.getInitParameter("travelmodule_hostname")%>/poster/event/<%=event%>"
 						alt="&quot;You can put a caption for your image right here&quot;" /></a></li>
 				<%
 					} else {
 				%>
 				<li><a href="#"><img width="950" height="450"
-						src="http://localhost:8081/TravelModule/rest/poster/event/<%=event%>"
+						src="<%=application.getInitParameter("travelmodule_hostname")%>/poster/event/<%=event%>"
 						alt="&quot;You can put a description of the image here if you like, or anything else if you want.&quot;" /></a></li>
 
 				<%
