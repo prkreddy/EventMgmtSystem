@@ -28,13 +28,13 @@
 			<nav>
 				<ul class="sf-menu" id="nav">
 					<li class="selected"><a href="loginAction">home</a></li>
-					<li><a href="about.html">about me</a></li>
+					<!-- <li><a href="about.html">about me</a></li> -->
 					<li><a href="#">Register services</a>
 						<ul>
 							<li><a href="/EMS/eventsRegisteredAction">travel</a></li>
-							<li><a href="portfolio_two.html">housing</a></li>
+							<li><a href="#">housing</a></li>
 						</ul></li>
-					<li><a href="travelContactAction">contact</a></li>
+					<!-- <li><a href="travelContactAction">contact</a></li> -->
 				</ul>
 			</nav>
 		</header>

@@ -9,13 +9,13 @@
 </head>
 <body id="page2">
 
-	<div class="main">
+	<!-- <div class="main">
 		<div id="banner">
-			<!-- <div class="text1">
+			<div class="text1">
 			COMFORT<span>Guaranteed</span><p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
-		</div> -->
 		</div>
-	</div>
+		</div>
+	</div> -->
 	<!-- <div class="ic">More Website Templates at TemplateMonster.com!</div> -->
 	<!-- header -->
 	<div class="main">
